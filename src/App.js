@@ -31,10 +31,10 @@ export default class Search extends Component {
 
   onPriceInputChange = (name, value) => {
     if(name === 'priceFrom') {
-      this.state.priceFrom = value
+      // this.state.priceFrom = value
       this.setState({priceFrom: value})
     } else {
-      this.state.priceTo = value
+      // this.state.priceTo = value
       this.setState({priceTo: value})
     }
     this.filterProducts()
@@ -49,12 +49,12 @@ export default class Search extends Component {
   }
 
   onCheckboxClick = (name, checked) => {
-    this.state.columns[name] = checked
+    // this.state.columns[name] = checked
     this.setState({columns: this.state.columns})
   }
 
   render() {
-    let displayedProducts = [];
+    // let displayedProducts = [];
     const {priceFrom, priceTo, columns, products } = this.state
     return (
       <div className="Products">
