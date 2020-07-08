@@ -5,8 +5,6 @@ import ProductList from './components/ProductList';
 import FilterForm from './components/FilterForm';
 import products from './../src/assets/products.json';
 
-// https://medium.com/@divyabiyani26/react-hooks-with-closures-usestate-v-s-usereducer-9e0c20e81051
-
 export default class Search extends Component {
   constructor(props) {
     super(props);
@@ -31,30 +29,29 @@ export default class Search extends Component {
 
   onPriceInputChange = (name, value) => {
     if(name === 'priceFrom') {
-      // this.state.priceFrom = value
-      this.setState({priceFrom: value})
+      this.state.priceFrom = value
+      this.setState({priceFrom: value},()=> this.filterProducts())
     } else {
-      // this.state.priceTo = value
-      this.setState({priceTo: value})
+      this.state.priceTo = value
+      this.setState({priceTo: value},()=> this.filterProducts())
     }
-    this.filterProducts()
+    
   }
 
   filterProducts = () => {
-
     const {priceFrom, priceTo} = this.state
-    let products = this.state.products.filter((e) => e.price >= priceFrom &&  e.price <= priceTo);
-    if(products.length > 0)
-    this.setState({products:products})
+    let products = this.state.products && this.state.products.filter((e) => e.price >= priceFrom &&  e.price <= priceTo);
+    if(products && products.length > 0)
+    this.setState({products:products, priceFrom: priceFrom, priceTo: priceTo})
   }
 
   onCheckboxClick = (name, checked) => {
-    // this.state.columns[name] = checked
+    this.state.columns[name] = checked
     this.setState({columns: this.state.columns})
   }
 
   render() {
-    // let displayedProducts = [];
+    // let displayedProducts = products;
     const {priceFrom, priceTo, columns, products } = this.state
     return (
       <div className="Products">
